@@ -1,0 +1,47 @@
+import random
+def rules():
+    print('RULES:'.center(70,'-'))
+    print('1. You have to guess a  number between 0 to 100 (both included). ')
+    print('2. You will have 5 turns to guess.')
+    print('3. You will get 5 points if you win.')
+    print('4. Press 101 for hint,but 1 point will be deducted.\n  ')
+i='y'
+userpoints=0
+
+while i=='y' or i=='Y':
+    turns=5
+    result='L'  # L=LOSES
+    comp=random.randint(0,100)
+    hint='EVEN'if comp%2==0 else 'ODD'
+    rules()
+
+    while turns>0:
+
+        print('Turns left: {}'.format(turns).rjust(70))
+        user=int(input('\nGuess the number:'))
+
+        
+        if user==101:
+            print('\nHint: The number is',hint) 
+            user=int(input('\nGuess a number:'))
+            userpoints-=1
+        if 0<=user<=100:
+            print()
+            if user==comp:
+                result='W'
+                userpoints+=5
+                break
+            elif user<comp:
+                print('The number you guessed is smaller.\nGuess a bigger number  ')
+            else:
+                print('The number you guessed is bigger.\nGuess a smaller number  ')        
+            turns-=1
+    if result=='L':
+        print('\nThe number is:',comp)
+        print('Better luck next time!!'.center(70,'~'))
+    else:
+        print('User wins!!'.center(70,'~'))    
+                    
+    print('Points: {}\n'.format(userpoints).center(70))
+
+    i=input('Want to play more(y/n)? : ')        
